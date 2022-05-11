@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+## JSON-SERVER
+
+### `json-server --watch ./db/db.json -p 3500`
+
 In the project directory, you can run:
 
 ### `yarn start`
