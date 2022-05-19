@@ -1,20 +1,15 @@
 import { Box, Button, Flex, HStack, Input, Text } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginContext } from "../components/LoginProvider";
 import { Logo } from "../components/Logo";
 
 export default function LoginPage() {
   const [login, setLogin] = useState({ login: "", senha: "" });
-  const { isLogged, setIsLogged } = useLoginContext();
+  const { setUserLogged } = useLoginContext();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isLogged) {
-    }
-  }, [isLogged]);
 
   async function checkCredentials() {
     const response = await axios.get("http://localhost:3500/users");
@@ -23,7 +18,7 @@ export default function LoginPage() {
         const auth = u.auth;
         if (auth.login === login.login && auth.senha === login.senha) {
           navigate("/");
-          setIsLogged(true);
+          setUserLogged(u);
         }
       }
     } else {
