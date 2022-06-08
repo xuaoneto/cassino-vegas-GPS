@@ -2,6 +2,22 @@ import { createContext, useContext, useState } from "react";
 
 const loginContext = createContext();
 
+// user model example
+// {
+//   "admin": false,
+//   "nome": "Fulano de tal",
+//   "dataNasc": "Tue May 10 2022 19:52:40 GMT-0300",
+//   "cpf": "123.123.123-12",
+//   "apostasFav": [
+//     {
+//       "numeros": [24, 32, 12, 21, 5, 76, 19, 19, 67, 49]
+//     }
+//   ],
+//   "auth": {
+//     "login": "123money",
+//     "senha": "12345678"
+//   }
+// },
 export const LoginProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(null);
 

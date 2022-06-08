@@ -17,7 +17,6 @@ export function MenuCreateBet() {
   const [dozens, setDozens] = useState("");
 
   function sendSweepstakes(sweepstakes) {
-    // console.log(sweepstakes);
     axios.post("http://localhost:3500/sweepstakes", sweepstakes);
   }
 
