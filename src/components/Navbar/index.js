@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   IconButton,
+  Input,
   Link,
   Menu,
   MenuButton,
@@ -13,11 +14,12 @@ import { useNavigate } from "react-router-dom";
 import { DefaultContainer } from "../DefaultContainer";
 import { useLoginContext } from "../LoginProvider";
 import { LogoWhite } from "../Logo";
+import { MenuCash } from "../MenuCash";
 import { MenuCreateBet } from "../MenuCreateBet";
+import { ProfileMenu } from "./profile";
 
 export function Navbar() {
-  const { userLogged, setUserLogged } = useLoginContext();
-  const navigate = useNavigate();
+  const { userLogged, userCash } = useLoginContext();
 
   return (
     <Flex w="100%" bg="#4fa1b1" px="50px" alignItems="center" py="20px">
@@ -26,36 +28,9 @@ export function Navbar() {
           <LogoWhite />
         </Box>
         <Flex alignItems="center">
+          {userLogged && userLogged.admin ? null : <MenuCash />}
           {userLogged && userLogged.admin ? <MenuCreateBet /> : null}
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              icon={
-                <Text fontSize="20">
-                  {userLogged && userLogged.nome.substr(0, 1)}
-                </Text>
-              }
-              justifyContent="center"
-              alignItems="center"
-              borderRadius="50%"
-              h="50px"
-              w="50px"
-              bg="white"
-              ml="20px"
-              border="none"
-              boxShadow="none"
-            />
-            <MenuList py="0">
-              <MenuItem
-                onClick={() => {
-                  setUserLogged(null);
-                  navigate("/login");
-                }}
-              >
-                Logout
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          <ProfileMenu />
         </Flex>
       </DefaultContainer>
     </Flex>

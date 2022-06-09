@@ -41,6 +41,7 @@ export default function CreateAccountPage() {
       login: login,
       senha: senha,
     },
+    cash: 0,
   };
 
   const navigate = useNavigate();

@@ -51,6 +51,7 @@ export function MenuCreateBet() {
           <Input
             placeholder="Prêmio"
             _focus={{}}
+            type="number"
             value={reward}
             onChange={(event) => setReward(event.target.value)}
           />

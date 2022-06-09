@@ -1,6 +1,7 @@
 {
   "users": [
     {
+      "id": 1,
       "admin": false,
       "nome": "Fulano de tal",
       "dataNasc": "Tue May 10 2022 19:52:40 GMT-0300",
@@ -24,9 +25,11 @@
       "auth": {
         "login": "123money",
         "senha": "12345678"
-      }
+      },
+      "cash": 246
     },
     {
+      "id": 2,
       "admin": true,
       "nome": "Jane Doe",
       "dataNasc": "Tue May 10 2022 19:52:40 GMT-0300",
@@ -50,31 +53,8 @@
       "auth": {
         "login": "admin",
         "senha": "12345678"
-      }
-    },
-    {
-      "admin": false,
-      "nome": "test",
-      "dataNasc": "test",
-      "cpf": "",
-      "apostasFav": [],
-      "auth": {
-        "login": "test",
-        "senha": "test"
       },
-      "id": -889597697
-    },
-    {
-      "admin": false,
-      "nome": "test",
-      "dataNasc": "test",
-      "cpf": "123123123",
-      "apostasFav": [],
-      "auth": {
-        "login": "test",
-        "senha": "test"
-      },
-      "id": "zIYgT7iP"
+      "cash": 366
     }
   ],
   "sweepstakes": [
@@ -88,7 +68,7 @@
         "20"
       ],
       "date": "Wed May 18 2022 21:44:07 GMT-0300 (Hora padrão de Brasília)",
-      "prize": "teassd",
+      "prize": "10230",
       "state": true,
       "id": 1
     },
@@ -102,7 +82,7 @@
         "20"
       ],
       "date": "Wed May 18 2022 21:44:11 GMT-0300 (Hora padrão de Brasília)",
-      "prize": "teassd",
+      "prize": "12938",
       "state": true,
       "id": 2
     },
@@ -116,7 +96,7 @@
         "20"
       ],
       "date": "Wed May 18 2022 21:44:12 GMT-0300 (Hora padrão de Brasília)",
-      "prize": "teassd",
+      "prize": "12390219",
       "state": true,
       "id": 3
     },
@@ -130,7 +110,7 @@
         "20"
       ],
       "date": "Wed May 18 2022 21:44:12 GMT-0300 (Hora padrão de Brasília)",
-      "prize": "teassd",
+      "prize": "891283",
       "state": true,
       "id": 4
     },
@@ -144,7 +124,7 @@
         "21"
       ],
       "date": "Tue Jun 07 2022 21:43:32 GMT-0300 (Hora padrão de Brasília)",
-      "prize": "nada",
+      "prize": "127837",
       "state": true,
       "id": 5
     }

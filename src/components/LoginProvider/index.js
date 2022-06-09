@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const loginContext = createContext();
 
@@ -20,12 +21,28 @@ const loginContext = createContext();
 // },
 export const LoginProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(null);
+  const [userCash, setUserCash] = useState(0);
+
+  useEffect(() => {
+    if (userLogged) {
+      userLogged["cash"] = userCash;
+      axios
+        .put(`http://localhost:3500/users/${userLogged.id}`, userLogged)
+        .then((response) => {
+          if (response.status === 200) {
+            setUserLogged({ ...userLogged });
+          }
+        });
+    }
+  }, [userCash]);
 
   return (
     <loginContext.Provider
       value={{
         setUserLogged,
         userLogged,
+        setUserCash,
+        userCash,
       }}
     >
       {children}

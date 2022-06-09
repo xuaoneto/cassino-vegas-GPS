@@ -14,9 +14,12 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BetModal } from "../BetModal";
+import { useLoginContext } from "../LoginProvider";
 import { SweepstakesRow } from "../SweepstakesRow";
 
 export function BetsSection() {
+  const { userLogged } = useLoginContext();
   const [bets, setBets] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idBet, setIdBet] = useState();
@@ -41,16 +44,20 @@ export function BetsSection() {
           bg="#2F3A50"
           border="1px solid rgba(255,255,255, 0.4)"
           py="30px"
-          gridTemplateColumns="repeat(5, 1fr)"
+          gridTemplateColumns="repeat(4, 1fr)"
           px="30px"
           color="white"
           gap="25px"
           borderRadius="10px"
         >
           {/* THEAD */}
-          <Text fontSize="18" textAlign="center">
-            Números
-          </Text>
+          {userLogged ? (
+            userLogged.admin ? (
+              <Text fontSize="18" textAlign="center">
+                Números
+              </Text>
+            ) : null
+          ) : null}
           <Text fontSize="18" textAlign="center">
             Data e Hora
           </Text>
@@ -60,7 +67,7 @@ export function BetsSection() {
           <Text fontSize="18" textAlign="center">
             Situação
           </Text>
-          <Box />
+          {userLogged ? userLogged.admin ? null : <Box /> : null}
           {/* FINAL THEAD */}
 
           {bets.map((item, index) => (
@@ -68,24 +75,7 @@ export function BetsSection() {
           ))}
         </Grid>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay backdropFilter="blur(5px)" />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>ALskdmaskldmasdmsalkd saodjaskdlasm asdo</Text>
-            <Text my="30px">{idBet}</Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <BetModal isOpen={isOpen} onClose={onClose} idBet={idBet} />
     </>
   );
 }

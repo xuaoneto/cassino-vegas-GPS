@@ -7,7 +7,7 @@ import { Logo } from "../components/Logo";
 
 export default function LoginPage() {
   const [login, setLogin] = useState({ login: "", senha: "" });
-  const { setUserLogged } = useLoginContext();
+  const { setUserLogged, setUserCash } = useLoginContext();
 
   const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ export default function LoginPage() {
         if (auth.login === login.login && auth.senha === login.senha) {
           navigate("/");
           setUserLogged(u);
+          setUserCash(u["cash"]);
         }
       }
     } else {
