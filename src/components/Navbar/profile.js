@@ -7,7 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useLoginContext } from "../LoginProvider";
+import { useLoginContext } from "../../contexts/LoginProvider";
 
 export function ProfileMenu() {
   const { userLogged, setUserLogged } = useLoginContext();

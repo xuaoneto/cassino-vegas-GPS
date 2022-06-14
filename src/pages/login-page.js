@@ -2,7 +2,7 @@ import { Box, Button, Flex, HStack, Input, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginContext } from "../components/LoginProvider";
+import { useLoginContext } from "../contexts/LoginProvider";
 import { Logo } from "../components/Logo";
 
 export default function LoginPage() {

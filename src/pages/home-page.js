@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BetsSection } from "../components/BetsSection";
 import { DefaultContainer } from "../components/DefaultContainer";
-import { useLoginContext } from "../components/LoginProvider";
+import { useLoginContext } from "../contexts/LoginProvider";
 import { Navbar } from "../components/Navbar";
 
 export default function HomePage() {

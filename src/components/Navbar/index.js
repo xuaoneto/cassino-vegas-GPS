@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { DefaultContainer } from "../DefaultContainer";
-import { useLoginContext } from "../LoginProvider";
+import { useLoginContext } from "../../contexts/LoginProvider";
 import { LogoWhite } from "../Logo";
 import { MenuCash } from "../MenuCash";
 import { MenuCreateBet } from "../MenuCreateBet";

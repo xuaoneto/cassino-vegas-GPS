@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { dateFormatter } from "../../utils";
-import { useLoginContext } from "../LoginProvider";
+import { useLoginContext } from "../../contexts/LoginProvider";
 
 export function SweepstakesRow({
   numbers,
@@ -53,7 +53,7 @@ export function SweepstakesRow({
         {dateFormatter(new Date(date))}
       </Text>
       <Text textAlign="center" my="auto">
-        {prize}
+        R$ {prize}
       </Text>
       <Text textAlign="center" my="auto">
         {state ? "Aberto" : "Fechado"}

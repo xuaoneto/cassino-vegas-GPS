@@ -11,10 +11,35 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
+import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
+import { useLoginContext } from "contexts/LoginProvider";
 import { useState } from "react";
 
-export function BetModal({ isOpen, onClose, idBet }) {
+export function BetModal({ isOpen, onClose, idBet, setWinner }) {
   const [numbersArray, setNumbersArray] = useState([]);
+  const { bets } = useApplicationContext();
+  const { setUserCash } = useLoginContext();
+  function handleCompareNumbers() {
+    let isLose = false;
+    bets.map((bet) => {
+      console.log(bet.id);
+      if (bet.id == idBet) {
+        for (let k of bet.numbers) {
+          console.log("passou aqui", numbersArray);
+          const verify = numbersArray.filter((current) => k == current);
+          console.log("passou aqui", verify);
+          if (verify.length === 0) {
+            isLose = true;
+            setWinner((state) => ({ winned: false, idbet: idBet }));
+          }
+        }
+        if (isLose === false) {
+          setWinner({ winned: true, idbet: idBet });
+          setUserCash((state) => state + parseFloat(bet.prize));
+        }
+      }
+    });
+  }
 
   function handleAddNumber(number) {
     if (numbersArray.length < 6) {
@@ -31,7 +56,7 @@ export function BetModal({ isOpen, onClose, idBet }) {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} borderRadius="10">
       <ModalOverlay backdropFilter="blur(5px)" />
       <ModalContent bg="#2F3A50" color="white">
         <ModalHeader>Modal Title</ModalHeader>
@@ -85,6 +110,7 @@ export function BetModal({ isOpen, onClose, idBet }) {
             _hover={{
               bg: "#189a46",
             }}
+            onClick={() => handleCompareNumbers()}
           >
             Apostar!
           </Button>

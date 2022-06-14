@@ -1,32 +1,38 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Grid, Text, useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BetModal } from "../BetModal";
-import { useLoginContext } from "../LoginProvider";
+import { useLoginContext } from "../../contexts/LoginProvider";
 import { SweepstakesRow } from "../SweepstakesRow";
+import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
+import { ModalWin } from "components/ModalWin";
+import { LoseModal } from "components/LoseModal";
 
 export function BetsSection() {
   const { userLogged } = useLoginContext();
-  const [bets, setBets] = useState([]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { bets, setBets } = useApplicationContext();
   const [idBet, setIdBet] = useState();
-  const handleBet = (id) => {
+  const [winner, setWinner] = useState(undefined);
+
+  function handleBet(id) {
     onOpen();
     setIdBet(id);
-  };
+  }
+
+  function handleCloseBet(idbet) {}
+
+  useEffect(() => {
+    if (winner.winned !== undefined) {
+      if (winner.winned) {
+        handleCloseBet(winner.idbet);
+      }
+      setTimeout(() => {
+        setWinner(undefined);
+      }, 5000);
+    }
+  }, [winner]);
 
   useEffect(() => {
     axios
@@ -75,7 +81,14 @@ export function BetsSection() {
           ))}
         </Grid>
       </Box>
-      <BetModal isOpen={isOpen} onClose={onClose} idBet={idBet} />
+      <BetModal
+        isOpen={isOpen}
+        onClose={onClose}
+        idBet={idBet}
+        setWinner={setWinner}
+      />
+      <ModalWin isOpen={winner.winned} onClose={setWinner} />
+      <LoseModal isOpen={winner.winned === false} onClose={setWinner} />
     </>
   );
 }

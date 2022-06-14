@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useLoginContext } from "../LoginProvider";
+import { useLoginContext } from "../../contexts/LoginProvider";
 
 export function MenuCash() {
   const [value, setValue] = useState("");
