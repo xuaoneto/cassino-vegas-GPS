@@ -55,6 +55,19 @@
         "senha": "12345678"
       },
       "cash": 366
+    },
+    {
+      "admin": false,
+      "nome": "Joaozin",
+      "dataNasc": "01/05/2000",
+      "cpf": "",
+      "apostasFav": [],
+      "auth": {
+        "login": "testsaldo",
+        "senha": "12345678"
+      },
+      "cash": 0.5,
+      "id": "jtMMcvFG"
     }
   ],
   "sweepstakes": [

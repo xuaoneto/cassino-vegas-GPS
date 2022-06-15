@@ -12,7 +12,7 @@ import { dateFormatter } from "../../utils";
 import { useLoginContext } from "../../contexts/LoginProvider";
 import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
 
-export function SweepstakesRow({ numbers, date, prize, state, model }) {
+export function SweepstakesRow({ numbers, id, prize, state, model }) {
   const { setBet } = useApplicationContext();
   const { userLogged } = useLoginContext();
   return (
@@ -45,7 +45,7 @@ export function SweepstakesRow({ numbers, date, prize, state, model }) {
         ) : null
       ) : null}
       <Text textAlign="center" my="auto">
-        {dateFormatter(new Date(date))}
+        {id}
       </Text>
       <Text textAlign="center" my="auto">
         R$ {prize}

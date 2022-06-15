@@ -58,7 +58,11 @@ export default function CreateAccountPage() {
       login === "" ||
       senha === "";
     model.id = makeid(8);
-    const response = await axios.post("http://localhost:3500/users", model);
+    const response = await axios
+      .post("http://localhost:3500/users", model)
+      .then((response) => {
+        if (response.status === 200) navigate("/login");
+      });
   }
   return (
     <Flex
@@ -98,7 +102,6 @@ export default function CreateAccountPage() {
           </Text>
           <Input
             placeholder="Cpf"
-            type="number"
             mb="20px"
             onChange={(e) => setCpf(e.target.value.toString())}
           />

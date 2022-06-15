@@ -9,7 +9,7 @@ import { ModalWin } from "components/ModalWin";
 import { LoseModal } from "components/LoseModal";
 
 export function BetsSection() {
-  const { userLogged } = useLoginContext();
+  const { userLogged, setUserCash, userCash } = useLoginContext();
   const { bets, setBets, bet, setBet } = useApplicationContext();
   // const [idBet, setIdBet] = useState();
   const [winner, setWinner] = useState(undefined);
@@ -27,9 +27,10 @@ export function BetsSection() {
       if (winner) {
         handleCloseBet();
       }
+
       setTimeout(() => {
         setWinner(undefined);
-      }, 5000);
+      }, 3000);
     }
   }, [winner]);
 
@@ -64,7 +65,7 @@ export function BetsSection() {
             ) : null
           ) : null}
           <Text fontSize="18" textAlign="center">
-            Data e Hora
+            Código Sorteio
           </Text>
           <Text fontSize="18" textAlign="center">
             Prêmio

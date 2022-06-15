@@ -20,16 +20,20 @@ export function BetModal({ setWinner }) {
   const [numbersArray, setNumbersArray] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { bets, bet, setBet } = useApplicationContext();
-  const { setUserCash } = useLoginContext();
+  const { setUserCash, userCash } = useLoginContext();
+
   function handleCompareNumbers() {
+    if (userCash > 4.5) {
+      setUserCash((currentCash) => currentCash - 4.5);
+    } else {
+      alert("Você não tem saldo suficiente para jogar!");
+      return;
+    }
     let isLose = false;
     bets.map((current) => {
-      console.log(current.id);
       if (current.id == bet.id) {
         for (let k of current.numbers) {
-          console.log("passou aqui", numbersArray);
           const verify = numbersArray.filter((current) => k == current);
-          console.log("passou aqui", verify);
           if (verify.length === 0) {
             isLose = true;
             setWinner(false);
