@@ -10,36 +10,52 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
 import { useLoginContext } from "contexts/LoginProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function BetModal({ isOpen, onClose, idBet, setWinner }) {
+export function BetModal({ setWinner }) {
   const [numbersArray, setNumbersArray] = useState([]);
-  const { bets } = useApplicationContext();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { bets, bet, setBet } = useApplicationContext();
   const { setUserCash } = useLoginContext();
   function handleCompareNumbers() {
     let isLose = false;
-    bets.map((bet) => {
-      console.log(bet.id);
-      if (bet.id == idBet) {
-        for (let k of bet.numbers) {
+    bets.map((current) => {
+      console.log(current.id);
+      if (current.id == bet.id) {
+        for (let k of current.numbers) {
           console.log("passou aqui", numbersArray);
           const verify = numbersArray.filter((current) => k == current);
           console.log("passou aqui", verify);
           if (verify.length === 0) {
             isLose = true;
-            setWinner((state) => ({ winned: false, idbet: idBet }));
+            setWinner(false);
           }
         }
         if (isLose === false) {
-          setWinner({ winned: true, idbet: idBet });
-          setUserCash((state) => state + parseFloat(bet.prize));
+          setWinner(true);
+          setUserCash((state) => state + parseFloat(current.prize));
         }
       }
     });
   }
+
+  useEffect(() => {
+    if (bet) {
+      onOpen();
+    } else {
+      onClose();
+    }
+  }, [bet]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setBet(undefined);
+    }
+  }, [isOpen]);
 
   function handleAddNumber(number) {
     if (numbersArray.length < 6) {

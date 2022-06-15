@@ -10,15 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { dateFormatter } from "../../utils";
 import { useLoginContext } from "../../contexts/LoginProvider";
+import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
 
-export function SweepstakesRow({
-  numbers,
-  date,
-  prize,
-  state,
-  onClickBet,
-  id,
-}) {
+export function SweepstakesRow({ numbers, date, prize, state, model }) {
+  const { setBet } = useApplicationContext();
   const { userLogged } = useLoginContext();
   return (
     <>
@@ -63,11 +58,12 @@ export function SweepstakesRow({
           <Flex>
             <Button
               mx="auto"
+              disabled={!state}
               variant="outline"
               _hover={{ bg: "rgba(255,255,255, 0.1)" }}
               color="white"
               _active={{ color: "black", bg: "rgba(255,255,255, 0.5)" }}
-              onClick={() => onClickBet(id)}
+              onClick={() => setBet(model)}
             >
               Apostar
             </Button>

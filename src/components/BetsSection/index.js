@@ -10,23 +10,22 @@ import { LoseModal } from "components/LoseModal";
 
 export function BetsSection() {
   const { userLogged } = useLoginContext();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { bets, setBets } = useApplicationContext();
-  const [idBet, setIdBet] = useState();
+  const { bets, setBets, bet, setBet } = useApplicationContext();
+  // const [idBet, setIdBet] = useState();
   const [winner, setWinner] = useState(undefined);
 
-  function handleBet(id) {
-    onOpen();
-    setIdBet(id);
+  function handleCloseBet() {
+    setBet((currentBet) => {
+      let modifiedBet = { ...currentBet };
+      modifiedBet.state = false;
+      return modifiedBet;
+    });
   }
 
-  function handleCloseBet(idbet) {}
-
   useEffect(() => {
-    if (winner.winned !== undefined) {
-      if (winner.winned) {
-        handleCloseBet(winner.idbet);
+    if (winner !== undefined) {
+      if (winner) {
+        handleCloseBet();
       }
       setTimeout(() => {
         setWinner(undefined);
@@ -77,18 +76,13 @@ export function BetsSection() {
           {/* FINAL THEAD */}
 
           {bets.map((item, index) => (
-            <SweepstakesRow key={`${index}`} onClickBet={handleBet} {...item} />
+            <SweepstakesRow key={`${index}`} model={item} {...item} />
           ))}
         </Grid>
       </Box>
-      <BetModal
-        isOpen={isOpen}
-        onClose={onClose}
-        idBet={idBet}
-        setWinner={setWinner}
-      />
-      <ModalWin isOpen={winner.winned} onClose={setWinner} />
-      <LoseModal isOpen={winner.winned === false} onClose={setWinner} />
+      <BetModal setWinner={setWinner} />
+      <ModalWin isOpen={winner} onClose={setWinner} />
+      <LoseModal isOpen={winner === false} onClose={setWinner} />
     </>
   );
 }
