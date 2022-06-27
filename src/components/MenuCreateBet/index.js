@@ -10,14 +10,21 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useApplicationContext } from "contexts/ApplicationContext/useApplicationContext";
 import { useEffect, useState } from "react";
 
 export function MenuCreateBet() {
   const [reward, setReward] = useState("");
   const [dozens, setDozens] = useState("");
+  const { setBets } = useApplicationContext();
 
-  function sendSweepstakes(sweepstakes) {
-    axios.post("http://localhost:3500/sweepstakes", sweepstakes);
+  async function sendSweepstakes(sweepstakes) {
+    const sendBet = await axios.post("http://localhost:3500/sweepstakes", sweepstakes)
+    const updateSweepstakes = await axios.get("http://localhost:3500/sweepstakes")
+
+    setBets(updateSweepstakes.data);
+
+    
   }
 
   function getRandomNumbers() {

@@ -20,16 +20,6 @@ export default function CreateAccountPage() {
   const [senha, setSenha] = useState("");
   const [isError, setIsError] = useState(false);
 
-  function makeid(length) {
-    var result = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
 
   const model = {
     admin: false,
@@ -57,21 +47,21 @@ export default function CreateAccountPage() {
       cpf === "" ||
       login === "" ||
       senha === "";
-    model.id = makeid(8);
     const response = await axios
       .post("http://localhost:3500/users", model)
       .then((response) => {
-        if (response.status === 200) navigate("/login");
+        if (response.status === 201) navigate("/login");
       });
   }
   return (
     <Flex
       alignItems="center"
-      h="100vh"
+      minH="100vh"
       w="100%"
       bg="#1A202C"
       justifyContent="center"
       color="white"
+      pb="80px"
     >
       <Box>
         <Box mb="80px">
@@ -125,13 +115,6 @@ export default function CreateAccountPage() {
           />
         </FormControl>
         <HStack mt="25px" spacing="15px">
-          <Button
-            variant="outline"
-            _hover={{ bg: "rgba(255,255,255, 0.1)" }}
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </Button>
           <Button
             variant="outline"
             _hover={{ bg: "rgba(255,255,255, 0.1)" }}
