@@ -1,11 +1,14 @@
-export function Logo({ size = "340" }) {
+import { Icon } from "@chakra-ui/react";
+
+export function Logo({ size = "340px", ...rest }) {
   return (
-    <svg
+    <Icon
       width={size}
-      height={parseInt(size) * 0.49117}
+      height="auto"
       viewBox="0 0 340 167"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <g clipPath="url(#clip0_6_4)">
         <path
@@ -34,7 +37,7 @@ export function Logo({ size = "340" }) {
           <rect width="340" height="166.999" fill="white" />
         </clipPath>
       </defs>
-    </svg>
+    </Icon>
   );
 }
 

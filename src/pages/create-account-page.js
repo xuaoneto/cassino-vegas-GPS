@@ -20,7 +20,6 @@ export default function CreateAccountPage() {
   const [senha, setSenha] = useState("");
   const [isError, setIsError] = useState(false);
 
-
   const model = {
     admin: false,
     nome: nome,
@@ -65,7 +64,7 @@ export default function CreateAccountPage() {
     >
       <Box>
         <Box mb="80px">
-          <Logo size="400" />
+          <Logo size="400px" />
         </Box>
         <FormControl>
           <Text fontSize="20" mb="12px">

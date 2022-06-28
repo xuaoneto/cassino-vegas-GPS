@@ -36,10 +36,11 @@ export default function LoginPage() {
         bg="#1A202C"
         justifyContent="center"
         color="white"
+        p="30px"
       >
-        <Box>
+        <Box maxW="100%">
           <Box mb="80px">
-            <Logo size="400" />
+            <Logo width={{ base: "100%", md: "400px" }} />
           </Box>
 
           <Text fontSize="20" mb="12px">
