@@ -1,4 +1,6 @@
+import { StarIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Flex,
   Grid,
@@ -26,6 +28,9 @@ const numberOfSelectedValues = {
   90: 8,
   300: 10,
 };
+function getKeyByValue(object, value) {
+  return Object.keys(object).find((key) => object[key] === value);
+}
 
 export function BetModal({ setWinner }) {
   const [numbersArray, setNumbersArray] = useState([]);
@@ -33,6 +38,8 @@ export function BetModal({ setWinner }) {
   const { bets, bet, setBet } = useApplicationContext();
   const { setUserCash, userCash } = useLoginContext();
   const [betPrice, setBetPrice] = useState(4.5);
+  const disabledButtons =
+    numbersArray.length < numberOfSelectedValues[betPrice];
 
   function handleCompareNumbers() {
     if (userCash > betPrice) {
@@ -86,12 +93,47 @@ export function BetModal({ setWinner }) {
   function handleDeleteNumber(number) {
     setNumbersArray(numbersArray.filter((item) => number !== item));
   }
+  function handleFavorite() {
+    const newFavorite = {
+      numbers: numbersArray,
+      price: getKeyByValue(numberOfSelectedValues, betPrice),
+    };
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} borderRadius="10">
       <ModalOverlay backdropFilter="blur(5px)" />
       <ModalContent bg="#2F3A50" color="white">
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader
+          alignItems="center"
+          display="flex"
+          justifyContent="space-between"
+          pr="50px"
+        >
+          <Text>Modal Title</Text>
+          <Tooltip
+            label="Tornar Aposta Favorita"
+            isDisabled={disabledButtons}
+            hasArrow
+            fontSize="md"
+          >
+            <Box
+              onClick={() => {
+                if (disabledButtons) handleFavorite({});
+              }}
+            >
+              <StarIcon
+                color="transparent"
+                stroke={
+                  disabledButtons
+                    ? "rgba(255,255,255,0.5)"
+                    : "rgba(255,255,255,0.7)"
+                }
+                strokeWidth="1"
+              />
+            </Box>
+          </Tooltip>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Grid gridTemplateColumns="repeat(6, auto)" gap="10px">
@@ -184,7 +226,7 @@ export function BetModal({ setWinner }) {
             <Button
               variant="outline"
               bg="#1db954"
-              disabled={numbersArray.length < numberOfSelectedValues[betPrice]}
+              disabled={disabledButtons}
               _hover={{
                 bg: "#189a46",
               }}
